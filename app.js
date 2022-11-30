@@ -2,7 +2,7 @@
 const strRegex =  /^[a-zA-Z\s]*$/; // containing only letters
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-/* supports following number formats - (123) 456-7890, (123)456-7890, 123-456-7890, 123.456.7890, 1234567890, +31636363634, 075-63546725 */
+
 const digitRegex = /^\d+$/;
 
 // -------------------------------------------------- //
@@ -119,9 +119,10 @@ class UI{
                 document.getElementById('modal-title').innerHTML = "Change Address Details";
 
                 document.getElementById('modal-btns').innerHTML = `
-                    <button type = "submit" id = "update-btn" data-id = "${id}">Update </button>
+                    <button type = "submit" id = "update-btn" data-id = "${id}" >Update </button>
                     <button type = "button" id = "delete-btn" data-id = "${id}">Delete </button>
                 `;
+                document.getElementById('info').innerHTML = `Contact has been updated`;
             }
         });
     }
@@ -155,10 +156,12 @@ function eventListeners(){
         document.getElementById('modal-btns').innerHTML = `
             <button type = "submit" id = "save-btn"> Save </button>
         `;
+        document.getElementById('info').innerHTML = `Contact has been saved`;
     });
 
     // close add item modal
     closeBtn.addEventListener('click', UI.closeModal);
+   
 
     // add an address item
     modalBtns.addEventListener('click', (event) => {
@@ -205,6 +208,7 @@ function eventListeners(){
     modalBtns.addEventListener('click', (event) => {
         if(event.target.id == 'delete-btn'){
             Address.deleteAddress(event.target.dataset.id);
+            document.getElementById('info').innerHTML = `Contact has been deleted`;
         }
     });
 
